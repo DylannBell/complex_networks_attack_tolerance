@@ -1,0 +1,51 @@
+DEFN. The interconnectdness of a network is described by its diameter d, 
+defined as the average length of the shortest paths between any two nodes
+in the network
+
+FUNCTIONS :
+    def generate_ER_graph(N, L, p)
+    def generate_SW_graph(N, L)
+    def display_graph(G)
+    def get_diameter(G)
+    def remove_nodes_randomly(G, f)
+    def most_connected_nodes(G)
+    def remove_connected_nodes(G, L)
+    def graph_results()
+
+FUNCTION DESCRIPTION :
+
+    generate_ER_graph(N, L, p)
+        N -> num. of nodes
+        L -> num. of links
+        p -> prob. of two nodes being connected
+    
+    generate_SW_graph(N,L)
+        N -> num. of nodes
+        L -> num. of links
+    
+    display_graph(G)
+        " Generates graphical display of graphs as seen in paper "
+        G -> prev. generated graph
+
+    get_diameter(G)
+        " Gets diameter of graph, following the defintion above "
+        G -> prev. generated graph
+    
+    remove_nodes_randomly(G, f)
+        G -> prev generated graph
+        f -> fraction of nodes to be removed
+
+    most_connected_nodes(G)
+        " Returns a list of most connected nodes in descending order " 
+        G -> prev generated graph
+
+    remove_connected_nodes(G, L)
+        G -> prev generated graph
+        L -> list of connected nodes
+
+    graph_results()
+        " Reproduces results found in paper " 
+
+
+
+
