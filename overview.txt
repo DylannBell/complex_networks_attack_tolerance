@@ -4,12 +4,17 @@ in the network
 
 FUNCTIONS :
     def generate_ER_graph(N, L, p)
-    def generate_SW_graph(N, L)
+    def generate_SF_graph(N, L)
     def display_graph(G)
+
     def get_diameter(G)
     def remove_nodes_randomly(G, f)
     def most_connected_nodes(G)
     def remove_connected_nodes(G, L)
+    
+    def get_largest_cluster(G)
+    def get_average_size_cluster(G)
+
     def graph_results()
 
 FUNCTION DESCRIPTION :
@@ -19,7 +24,7 @@ FUNCTION DESCRIPTION :
         L -> num. of links
         p -> prob. of two nodes being connected
     
-    generate_SW_graph(N,L)
+    generate_SF_graph(N,L)
         N -> num. of nodes
         L -> num. of links
     
@@ -43,9 +48,61 @@ FUNCTION DESCRIPTION :
         G -> prev generated graph
         L -> list of connected nodes
 
+    S = get_largest_cluster(G)
+        " Returns the size of the largest cluster S, as a fraction of the total system size "
+        G -> prev. generated graph
+
+    s = get_average_size_cluster(G)
+        " Average size of the isolated clusters (all the clusters except the largest ones) "
+        G -> prev. generated graph
+
     graph_results()
         " Reproduces results found in paper " 
 
+EXPERIMENTS : 
 
+    #1 - Changes in the diameter d of the network as a function of the fraction f of the removed nodes
 
+        ER = generate_ER_graph
+        SF = generate_SF_graph
+        const f
 
+        # error tolerance 
+        remove_nodes_randomly(ER, f)
+        remove_nodes_randomly(ER, f)
+        graph_results()
+
+        # ER attack
+        ER_conn_nodes = most_connected_nodes(ER)
+        remove_connected_nodes(ER_conn_nodes)
+        graph_results()
+
+        # SF attack
+        SF_conn_nodes = most_connected_nodes(SF)
+        remove_connected_nodes(SF_conn_nodes)
+        graph_results()
+
+    #2 - S and s as a function of the fraction of nodes removed from the network
+
+        ER = generate_ER_graph
+        SF = generate_SF_graph
+        const f
+
+        # Generate ER
+        S = get_largest_cluster(ER)
+        s = get_average_size_cluster(ER)
+        
+        # ER Err Tolerance
+        remove_nodes_randomly(ER,f)
+
+        # ER Attack
+        ER_conn_nodes = most_connected_nodes(ER)
+        remove_connected_nodes(ER_conn_nodes)
+
+        # ER Graph
+
+        # Do the same for SF
+
+    #3 - Summary of the response of a network to failures or attacks
+
+        # Not really sure...
