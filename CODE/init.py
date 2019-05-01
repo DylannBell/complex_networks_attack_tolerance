@@ -11,7 +11,7 @@ random.seed(seed)
 np.random.seed(seed)
 
 def experiment_one():
-    N = 200
+    N = 1000
     P = 0.5
 
     # need to ensure both the below have the same number of links
@@ -21,13 +21,17 @@ def experiment_one():
     # error tolerance
     remove_range = list(np.arange(0.005, 0.055, 0.005))
 
+    # ISSUES - 
+    # need to fix get diameter : don't think it's working properly
+    # need to ensure graphs are being generated properly
+
     # ER Failure
-    ER_failure_diameters = generate_failure(ER_graph, remove_range)
-    graph(remove_range, ER_failure_diameters, 'Failure')
+    # ER_failure_diameters = generate_failure(ER_graph, remove_range)
+    # graph(remove_range, ER_failure_diameters, 'Failure')
 
     # ER Attack
-    ER_attack_diameters = generate_attack(ER_graph, remove_range)
-    graph(remove_range, ER_attack_diameters, 'Attack')
+    # ER_attack_diameters = generate_attack(ER_graph, remove_range)
+    # graph(remove_range, ER_attack_diameters, 'Attack')
 
 def graph(x, y, title):
     plt.plot(x, y, marker='o')
