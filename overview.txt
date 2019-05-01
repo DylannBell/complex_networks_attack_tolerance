@@ -1,7 +1,6 @@
 NOTES : 
 
     - Need to add own implementations later; don't just use networkx implementations!
-    - Need to add seed to ensure we get the same results everytime
     - Need to ensure both graphs have the same number of links
 
 DEFN : 
@@ -13,14 +12,14 @@ DEFN :
 FUNCTIONS :
 
     CREATE
-    def ER_graph(N, p) 
-    def SF_graph(N)
+    def ER_graph(N, p)
+    def SF_graph(N) 
     
     GET  
     def diameter(G)
+    def most_connected_nodes(G)
     def largest_cluster(G)
     def average_size_cluster(G)
-    def most_connected_nodes(G)
     
     DELETE
     def random_nodes(G, f)
