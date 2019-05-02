@@ -2,22 +2,7 @@ from networkx import nx
 import numpy as np
 
 def diameter(G):
-    # return nx.average_shortest_path_length(G)
-    # return np.mean(sample_path_lengths(G))
-    # return nx.diameter(G)
-
-# average path length - taken from the book - need to redo
-def sample_path_lengths(G, nodes=None, trials=100000):
-    if nodes is None:
-        nodes = list(G)
-    else:
-        nodes = list(nodes)
-        
-    pairs = np.random.choice(nodes, (trials, 2))
-    lengths = [nx.shortest_path_length(G, *pair) 
-               for pair in pairs]
-    return lengths
-
+    return nx.average_shortest_path_length(G)
 
 def most_connected_nodes(G):
     degrees = list(G.degree)
