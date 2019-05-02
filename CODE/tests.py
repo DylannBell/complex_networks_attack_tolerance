@@ -12,6 +12,8 @@ seed = 123
 random.seed(seed)
 np.random.seed(seed)
 
+# NEED TO REDO : create.SF_graph(N, seed) -> create.SF_graph(N, M, seed)
+
 def init():
     N = 50
     ER = create.ER_graph(N, 0.1, seed)
@@ -64,12 +66,13 @@ def testGet(N, ER, SF):
 
 def testDelete():
     N = 100
+    M = 5
     r = 0.5
     delete_amount = r * N
     remaining_nodes = N - delete_amount
 
     ER = create.ER_graph(N, 0.1, seed)
-    SF = create.SF_graph(N, seed)
+    SF = create.SF_graph(N, M, seed)
     
     ER_list = get.most_connected_nodes(ER)[1:5]
     ER_deleted = delete.connected_nodes(ER, ER_list)
