@@ -10,14 +10,21 @@ def most_connected_nodes(G):
     return degrees
 
 # The below two functions are wrong...
-def largest_cluster(G):
-    l = most_connected_nodes(G)
-    return l[0]
+def largest_cluster_len(G):
+    sub_graphs = list(nx.connected_component_subgraphs(G))
+    largest_cluster = sub_graphs[0]
+    return len(largest_cluster)
 
-def average_size_cluster(G):
-    avg_clusters = most_connected_nodes(G)[1:]
+# def largest_cluster(G):
+    # nx.connected_component_subgraphs(G)
+
+    # l = most_connected_nodes(G)
+    # return l[0]
+
+# def average_size_cluster(G):
+    # avg_clusters = most_connected_nodes(G)[1:]
    
-    avg_cluster_size = len(avg_clusters)
-    avg_cluster_sum = sum([cluster[1] for cluster in avg_clusters])
+    # avg_cluster_size = len(avg_clusters)
+    # avg_cluster_sum = sum([cluster[1] for cluster in avg_clusters])
 
-    return float(avg_cluster_sum/avg_cluster_size)
+    # return float(avg_cluster_sum/avg_cluster_size)
