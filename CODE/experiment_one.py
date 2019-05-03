@@ -37,8 +37,8 @@ def generate_failure(G, remove_range):
     diameters = []
 
     for f in remove_range:
-        deleted_graph = delete.random_nodes(G, f)
-        recalculated_diameter = get.diameter(deleted_graph)
+        modified_graph = delete.random_nodes(G, f)
+        recalculated_diameter = get.diameter(modified_graph)
         diameters.append(recalculated_diameter)
 
     return diameters
