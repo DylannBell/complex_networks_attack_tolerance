@@ -11,8 +11,8 @@ def most_connected_nodes(G):
 
 # The below two functions are wrong...
 def largest_cluster_len(G):
-    sub_graphs = list(nx.connected_component_subgraphs(G))
-    largest_cluster = sub_graphs[0]
+    sub_graphs_sorted = sorted(nx.connected_component_subgraphs(G), key=len, reverse=True)
+    largest_cluster = sub_graphs_sorted[0]
     return len(largest_cluster)
 
 # def largest_cluster(G):
@@ -28,3 +28,16 @@ def largest_cluster_len(G):
     # avg_cluster_sum = sum([cluster[1] for cluster in avg_clusters])
 
     # return float(avg_cluster_sum/avg_cluster_size)
+
+def isolated_clusters_len(G):
+    sub_graphs_sorted = sorted(nx.connected_component_subgraphs(G), key=len, reverse=True)
+    if len(sub_graphs_sorted) == 1:
+        return 0
+    largest_cluster = sub_graphs_sorted[0]
+    sub_graphs_sorted.remove(largest_cluster)
+    sum_lengths = 0
+    for subgraph in sub_graphs_sorted:
+        sum_lengths = sum_lengths + len(subgraph)
+
+    
+    return sum_lengths/len(sub_graphs_sorted)
