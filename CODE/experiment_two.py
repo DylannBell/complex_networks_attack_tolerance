@@ -9,15 +9,16 @@ import delete
 def init(seed):
     N = 1000
     M = 7
-    P = 0.004
+    #M = 2
+    P = 0.002
     # need to ensure both the below have the same number of links
     ER_graph_big_S = create.ER_graph(N, P, seed)
-    SF_graph_big_S = create.SF_graph(N, M, seed)
+    #SF_graph_big_S = create.SF_graph(N, M, seed)
     ER_graph_small_s = create.ER_graph(N, P, seed)
-    SF_graph_small_s = create.SF_graph(N, M, seed)
+    #SF_graph_small_s = create.SF_graph(N, M, seed)
 
     # error tolerance
-    remove_range = list(np.arange(0.0, 0.55, 0.01))
+    remove_range = list(np.arange(0.0, 1, 0.01))
     
     # GRAPH #1
     ER_system_size = len(ER_graph_big_S)
@@ -83,9 +84,16 @@ def generate_attack_small_s(G, remove_range):
 
 def generate_failure_small_s(G, remove_range):
     S = []
+    N = len(G.nodes)
 
-    for f in remove_range:
-        modified_graph = delete.random_nodes(G, f)
+    for i, f in enumerate(remove_range):
+        delete_amount = int(N * f)
+        
+        if i == 0:
+            modifed_graph = delete.random_nodes(G, delete_amount)
+        else:
+            modifed_graph = delete.random_nodes(modified_graph, delete_amount)
+
         avg_isolated_cluster = get.isolated_clusters_len(modified_graph)
         S.append(avg_isolated_cluster)
 
