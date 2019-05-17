@@ -3,6 +3,7 @@ import networkx as nx
 import delete
 import get
 import numpy as np
+import matplotlib.pyplot as plt
 
 def init():
     facebook = read_graph('facebook_combined.txt.gz')
@@ -26,6 +27,20 @@ def init():
     facebook_failure_diameters = []
     recursive_failure(facebook_failure, fb_nodes, facebook_failure_diameters)
     print(facebook_failure_diameters)
+
+    # facebook_attack_diameters = [4.188, 4.608, 4.896, 5.16, 5.501, 5.549, 5.431, 5.355, 5.43, 5.652, 5.578, 5.499, 5.468, 5.516, 5.439, 5.466, 5.457, 5.614, 5.563, 5.426]
+    # facebook_failure_diameters = [3.948, 3.899, 3.916, 4.037, 3.965, 3.925, 3.959, 4.078, 3.881, 4.082, 3.942, 4.018, 3.914, 3.958, 4.002, 3.951, 4.019, 3.941, 3.988, 3.907]
+    # x = range(0, len(facebook_attack_diameters))
+    # generate_graph(facebook_attack_diameters, facebook_failure_diameters, x)
+    
+def generate_graph(attack, failure, x):
+    plt.plot(x, failure, marker='^', label="Facebook Failure", color="b")
+    plt.plot(x, attack, marker='D', label="Facebook Attack", color="r")
+    plt.xlabel('X')
+    plt.ylabel('Diameter d Of Largest Subgraph')
+    plt.legend(loc='upper right')
+    plt.title("Failure & Attack On Facebook Graph")
+    plt.show()
 
 def recursive_failure(G, random_nodes, diameters):
     # break recursion
