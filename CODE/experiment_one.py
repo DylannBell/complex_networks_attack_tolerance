@@ -1,6 +1,7 @@
 import numpy as np
 import itertools
 import matplotlib.pyplot as plt
+import random
 
 import create
 import get
@@ -37,7 +38,10 @@ def generate_failure(G, remove_range):
     diameters = []
 
     for f in remove_range:
-        deleted_graph = delete.random_nodes(G, f)
+        G_random_nodes = list(G.nodes())
+        random.shuffle(G_random_nodes)
+
+        deleted_graph = delete.random_nodes(G, f, G_random_nodes)
         recalculated_diameter = get.diameter(deleted_graph)
         diameters.append(recalculated_diameter)
 
