@@ -3,7 +3,6 @@ import random
 
 def random_nodes(G, f, L):
     G_local = G.copy()
-
     N = len(G_local.nodes)
     delete_amount = int(N * f)
     count = 1
