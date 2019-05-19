@@ -15,14 +15,13 @@ def init(seed):
     remove_range = list(np.arange(0.0, 1, 0.01))
 
     # ER
-    # ER = create.ER_graph(N, P, seed)
-    # ER_system_size = len(ER)
-
-    # ER_Failure_big_S = generate_failure_big_S(ER, remove_range, ER_system_size)
-    # ER_Attack_big_S = generate_attack_big_S(ER, remove_range, ER_system_size)
-    # ER_Failure_small_s = generate_failure_small_s(ER, remove_range)
-    # ER_Attack_small_s = generate_attack_small_s(ER, remove_range)
-    # generate_graph("ER Graph", remove_range, ER_Failure_big_S, ER_Attack_big_S, ER_Failure_small_s, ER_Attack_small_s)
+    ER = create.ER_graph(N, P, seed)
+    ER_system_size = len(ER)
+    ER_Failure_big_S = generate_failure_big_S(ER, remove_range, ER_system_size)
+    ER_Attack_big_S = generate_attack_big_S(ER, remove_range, ER_system_size)
+    ER_Failure_small_s = generate_failure_small_s(ER, remove_range)
+    ER_Attack_small_s = generate_attack_small_s(ER, remove_range)
+    generate_graph("ER Graph", remove_range, ER_Failure_big_S, ER_Attack_big_S, ER_Failure_small_s, ER_Attack_small_s)
     
     # SF
     # SF = create.SF_graph(N, M, seed)
