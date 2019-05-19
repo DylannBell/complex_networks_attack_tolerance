@@ -12,11 +12,9 @@ def init():
 
     # ATTACK
     facebook_attack_diameters = generate_attack(facebook, N, remove_range)
-    print(facebook_attack_diameters)
-
+    
     # FAILURE
     facebook_failure_diameters = generate_failure(facebook, N, remove_range)
-    print(facebook_failure_diameters)
 
     # GRAPHING
     generate_graph(facebook_attack_diameters, facebook_failure_diameters, remove_range)
@@ -85,6 +83,3 @@ def sample_path_lengths(G, trials=1000):
 
 def estimate_path_length(G, trials=1000):
     return np.mean(sample_path_lengths(G, trials))
-
-
-init()
