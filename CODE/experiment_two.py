@@ -2,6 +2,7 @@ import numpy as np
 import itertools
 import matplotlib.pyplot as plt
 import random
+import networkx as nx
 
 import create
 import get
@@ -9,8 +10,7 @@ import delete
 
 def init(seed):
     N = 1000
-    M = 7
-    # M = 2
+    M = 2
     P = 0.002
     remove_range = list(np.arange(0.0, 1, 0.01))
 
@@ -31,15 +31,31 @@ def init(seed):
     # SF_Failure_big_S = generate_failure_big_S(SF, remove_range, SF_system_size)
     # SF_Attack_big_S = generate_attack_big_S(SF, remove_range, SF_system_size)
     # SF_Failure_small_s = generate_failure_small_s(SF, remove_range)
-    # SF_attack_small_s = generate_attack_small_s(SF, remove_range)
-    # generate_graph("SF Graph", remove_range, SF_Failure_big_S, SF_Attack_big_S, SF_Failure_small_s, SF_attack_small_s)
+    # SF_Attack_small_s = generate_attack_small_s(SF, remove_range)
+    # generate_graph("SF Graph", remove_range, SF_Failure_big_S, SF_Attack_big_S, SF_Failure_small_s, SF_Attack_small_s)
 
+    # FACEBOOK
+    # remove_range = list(np.arange(0.0,0.5, 0.01))
+    # facebook = read_graph('facebook_combined.txt.gz')
+    # facebook_system_size = len(facebook)
+
+    # facebook_Failure_big_S = generate_failure_big_S(facebook, remove_range, facebook_system_size)
+    # facebook_Attack_big_S = generate_attack_big_S(facebook, remove_range, facebook_system_size)
+    # facebook_Failure_small_s = generate_failure_small_s(facebook, remove_range)
+    # facebook_Attack_small_s = generate_attack_small_s(facebook, remove_range)
+    # generate_graph("Facebook Graph", remove_range, facebook_Failure_big_S, facebook_Attack_big_S, facebook_Failure_small_s, facebook_Attack_small_s)
+
+def read_graph(filename):
+    G = nx.Graph()
+    array = np.loadtxt(filename, dtype=int)
+    G.add_edges_from(array)
+    return G
 
 def generate_graph(name, remove_range, Failure_big_S, Attack_big_S, Failure_small_s, Attack_small_s):
-    plt.plot(remove_range, Failure_big_S, marker='^', linestyle = 'None', label="ER Failure S", color="b", markerfacecolor='none')
-    plt.plot(remove_range, Attack_big_S, marker='D', linestyle = 'None', label="ER Attack S", color="r", markerfacecolor='none')
-    plt.plot(remove_range, Failure_small_s, marker='^', linestyle = 'None', label="ER Failure <s>", color="b",)
-    plt.plot(remove_range, Attack_small_s, marker='D', linestyle = 'None', label="ER Attack <s>", color="r")
+    plt.plot(remove_range, Failure_big_S, marker='^', linestyle = 'None', label="Failure S", color="b", markerfacecolor='none')
+    plt.plot(remove_range, Attack_big_S, marker='D', linestyle = 'None', label="Attack S", color="r", markerfacecolor='none')
+    plt.plot(remove_range, Failure_small_s, marker='^', linestyle = 'None', label="Failure <s>", color="b",)
+    plt.plot(remove_range, Attack_small_s, marker='D', linestyle = 'None', label="Attack <s>", color="r")
     plt.xlabel('Fraction f of nodes removed')
     plt.ylabel('S')
     plt.legend(loc='upper right')
@@ -84,10 +100,10 @@ def generate_attack_small_s(G, remove_range):
 
 def generate_failure_small_s(G, remove_range):
     S = []
+    G_random_nodes = list(G.nodes())
+    random.shuffle(G_random_nodes)
 
     for f in remove_range:
-        G_random_nodes = list(G.nodes())
-        random.shuffle(G_random_nodes)
         modified_graph = delete.random_nodes(G, f, G_random_nodes)
         avg_isolated_cluster = get.isolated_clusters_len(modified_graph)
         S.append(avg_isolated_cluster)
